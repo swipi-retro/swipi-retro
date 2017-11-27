@@ -14,4 +14,5 @@ Disclaimer: We are absolute beginners in the field of CAD design and electrical 
 
 ## How to use it?
 
-## Acknowledgments
+## Acknowledgements
+⋅⋅* Rotter, for making the entry to CAD-software as easy as it gets.
