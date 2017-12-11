@@ -9,6 +9,8 @@ const byte powerCutPin = A4;
 
 // Initialize some values
 boolean isInShutdown = false;
+int lastButtonState = HIGH;
+int clickStartedMillis = 0;
 
 void setup() {
   // Pin modes
@@ -22,46 +24,53 @@ void setup() {
 }
 
 void loop() {
-  if (isInShutdown == false) {
     int buttonState = digitalRead(powerButtonPin);
-  
-    if (buttonState == LOW) {
-      digitalWrite(shutdownCommandSenderPin, LOW); // Send shutdown-command
-  
-      // Blink twice 
-      digitalWrite(ledPin, HIGH);
-      delay(400);
-      digitalWrite(ledPin, LOW);
-      delay(400);
-      digitalWrite(ledPin, HIGH);
-      delay(400);
-      digitalWrite(ledPin, LOW);
-      
-      isInShutdown = true;
+
+    if (buttonState != lastButtonState) {
+      if (buttonState == LOW){ // Button was just pressed
+        clickStartedMillis = millis();
+        lastButtonState = LOW;
+      }
+      else { // // Button was just released
+        int timePressed =millis() - clickStartedMillis;
+
+        lastButtonState = HIGH;
+        clickStartedMillis = 0;
+
+        if (timePressed >= 1000 && timePressed < 3000) {
+          digitalWrite(shutdownCommandSenderPin, LOW); // Send shutdown-command
+          isInShutdown = true;
+        }
+
+        if (timePressed >= 3000) {
+          // Cut power
+          analogWrite(powerCutPin, 1023);
+        }
+      }
     }
-  }
-  else {
-    int shutdownState = digitalRead(shutdownNotificationReceiverPin);
 
-    if (shutdownState == LOW) {
-      // Blink three times
-      digitalWrite(ledPin, HIGH);
-      delay(400);
-      digitalWrite(ledPin, LOW);
-      delay(400);
-      digitalWrite(ledPin, HIGH);
-      delay(400);
-      digitalWrite(ledPin, LOW);
-      delay(400);
-      digitalWrite(ledPin, HIGH);
-      delay(400);
-      digitalWrite(ledPin, LOW);
+    if (isInShutdown == true){
+      int shutdownState = digitalRead(shutdownNotificationReceiverPin);
 
-      // Additional time needed for the pi to properly shutdown
-      delay(6500);
-
-      // Cut power
-      analogWrite(powerCutPin, 1023);
+      if (shutdownState == LOW) {
+        // Blink three times
+        digitalWrite(ledPin, HIGH);
+        delay(400);
+        digitalWrite(ledPin, LOW);
+        delay(400);
+        digitalWrite(ledPin, HIGH);
+        delay(400);
+        digitalWrite(ledPin, LOW);
+        delay(400);
+        digitalWrite(ledPin, HIGH);
+        delay(400);
+        digitalWrite(ledPin, LOW);
+  
+        // Additional time needed for the pi to properly shutdown
+        delay(6500);
+  
+        // Cut power
+        analogWrite(powerCutPin, 1023);
+      }
     }
-  }
 }
