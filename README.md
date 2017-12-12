@@ -8,6 +8,12 @@ To build one yourself you have simply to follow the tutorial below. First, you a
 
 Disclaimer: We are absolute beginners in the field of CAD design and electrical engineering, so don't trust a word we say! We are using this project to gain and level up new skills.
 
+## Partlist
+* Raspberry Pi 3 Model B
+* Official Raspberry Pi 7" Screen
+* Nintendo Switch Joy-Cons
+* Heatsinks
+
 ## Building the hardware
 
 ## Installation
