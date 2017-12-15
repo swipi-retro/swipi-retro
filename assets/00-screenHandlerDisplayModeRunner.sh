@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo nohup /home/pi/scripts/screenHandlerDisplayMode.sh &
+sudo nohup /home/pi/swipi-retro/assets/screenHandlerDisplayMode.sh &
 
 sleep 1
 

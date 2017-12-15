@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo nohup /home/pi/scripts/screenHandlerPowerStateOnIndicator.sh &
+sudo nohup /home/pi/swipi-retro/assets/screenHandlerPowerStateOnIndicator.sh &
 
 sleep 1
 
