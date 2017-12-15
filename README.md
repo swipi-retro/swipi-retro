@@ -19,6 +19,18 @@ Disclaimer: We are absolute beginners in the field of CAD design and electrical 
 ## Building the hardware
 
 ## Installation
+Simply execute the lines below on your RetroPie (this will download this repository and do the complete installation).
+
+```
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get dist-upgrade -y
+sudo apt-get install -y git
+sudo mkdir swipi-retro
+cd swipi-retro
+sudo git clone https://github.com/swipi-retro/swipi-retro.git
+sudo bash 00-prerequisite.sh
+```
 
 ## How to use it?
 
