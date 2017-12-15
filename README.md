@@ -1,3 +1,5 @@
+__NOTE: This project is still in early development! It should be beta-ready in Q1 or Q2 2018.__
+
 # swipi retro
 A retropie based handheld gameconsole using joycons as controllers.
 
