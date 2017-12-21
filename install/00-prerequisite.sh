@@ -17,7 +17,7 @@ sudo apt-get install -y python-setuptools python-dev
 sudo apt-get install -y python3 python3-pip
 sudo easy_install rpi.gpio
 
-cd..
+cd ..
 sudo mkdir git
 cd git
 git clone https://github.com/pimoroni/python-multitouch.git
@@ -28,4 +28,21 @@ sudo pip3 install python-uinput pyudev rpi_backlight
 sudo apt-get install -y screen
 #Create screen-switch-scripts
 cd /home/pi/swipi-retro/assets/
+cd all
+sudo mv retroarch.cfg /opt/retropie/configs/all/retroarch.cfg
+cd retroarch
+cd autoconfig
+sudo mv Full Joy-Con 1.cfg /opt/retropie/configs/all/retroarch/autoconfig/Full Joy-Con 1.cfg
+sudo mv Full Joy-Con 1.cfg.bak /opt/retropie/configs/all/retroarch/autoconfig/Full Joy-Con 1.cfg.bak
+sudo mv Half Joy-Con 1.cfg /opt/retropie/configs/all/retroarch/autoconfig/Half Joy-Con 1.cfg
+sudo mv Half Joy-Con 1.cfg.bak /opt/retropie/configs/all/retroarch/autoconfig/Half Joy-Con 1.cfg.bak
+sudo mv Half Joy-Con 2.cfg /opt/retropie/configs/all/retroarch/autoconfig/Half Joy-Con 2.cfg
+sudo mv Half Joy-Con 2.cfg.bak /opt/retropie/configs/all/retroarch/autoconfig/Half Joy-Con 2.cfg.bak
+sudo mv Joy-Con(L).cfg /opt/retropie/configs/all/retroarch/autoconfig/Joy-Con(L).cfg
+sudo mv Joy-Con(R).cfg /opt/retropie/configs/all/retroarch/autoconfig/Joy-Con(R).cfg
+cd ..
+cd ..
+cd emulationstation
+sudo mv es_input.cfg /opt/retropie/configs/all/emulationstation/es_input.cfg
+sudo mv es_temporaryinput.cfg /opt/retropie/configs/all/emulationstation/es_temporaryinput.cfg
 
