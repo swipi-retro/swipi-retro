@@ -38,3 +38,5 @@ sudo bash 00-prerequisite.sh
 
 ## Acknowledgements
 * Rotter, for making the entry to CAD-software as easy as it gets
+* [Riking](https://github.com/riking/joycon), for making a joycon driver
+* [Drew Wallace](https://github.com/drew-wallace/switchberry), for the nice project
