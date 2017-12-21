@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo sed -i 's/display_default_lcd=1/display_default_lcd=0/g' /boot/config.txt
+sudo amixer cset numid=3 2
+sudo reboot
