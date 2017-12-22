@@ -31,6 +31,7 @@ sudo apt-get install -y git
 sudo mkdir swipi-retro
 cd swipi-retro
 sudo git clone https://github.com/swipi-retro/swipi-retro.git
+cd swipi-retro/install
 sudo bash 00-prerequisite.sh
 ```
 
