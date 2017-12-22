@@ -2,8 +2,12 @@
 controlflag=0
 while :
 do
-links=$(bt-device -i 04:03:D6:BA:81:5C)
-rechts=$(bt-device -i 04:03:D6:B9:DB:FA)
+deviceList=$(bt-device -l)
+mac1=$(echo $deviceList | cut -b 29-45)
+mac2=$(echo $deviceList | cut -b 61-77)
+echo $mac1
+links=$(bt-device -i $mac1)
+rechts=$(bt-device -i $mac2)
 connectedL=$(echo $links | cut -d ':' -f20)
 connectedR=$(echo $rechts | cut -d ':' -f20)
 finalL=$(echo $connectedL | cut -d ' ' -f1)
