@@ -36,8 +36,8 @@ sudo mv "Half Joy-Con 1.cfg" "/opt/retropie/configs/all/retroarch/autoconfig/Hal
 sudo mv "Half Joy-Con 1.cfg.bak" "/opt/retropie/configs/all/retroarch/autoconfig/Half Joy-Con 1.cfg.bak"
 sudo mv "Half Joy-Con 2.cfg" "/opt/retropie/configs/all/retroarch/autoconfig/Half Joy-Con 2.cfg"
 sudo mv "Half Joy-Con 2.cfg.bak" "/opt/retropie/configs/all/retroarch/autoconfig/Half Joy-Con 2.cfg.bak"
-sudo mv "Joy-Con(L).cfg" "/opt/retropie/configs/all/retroarch/autoconfig/Joy-Con(L).cfg"
-sudo mv "Joy-Con(R).cfg" "/opt/retropie/configs/all/retroarch/autoconfig/Joy-Con(R).cfg"
+sudo mv "Joy-Con (L).cfg" "/opt/retropie/configs/all/retroarch/autoconfig/Joy-Con (L).cfg"
+sudo mv "Joy-Con (R).cfg" "/opt/retropie/configs/all/retroarch/autoconfig/Joy-Con (R).cfg"
 sudo mv "es_input.cfg" "/opt/retropie/configs/all/emulationstation/es_input.cfg"
 sudo mv "es_temporaryinput.cfg" "/opt/retropie/configs/all/emulationstation/es_temporaryinput.cfg"
 
