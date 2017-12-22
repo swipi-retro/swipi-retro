@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sudo screen -dmSL powerStateOnIndicator /home/pi/scripts/powerStateOnIndicator.py
+sudo screen -dmSL powerStateOnIndicator /home/pi/swipi-retro/assets/powerStateOnIndicator.py

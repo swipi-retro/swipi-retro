@@ -25,8 +25,8 @@ git clone https://github.com/pimoroni/python-multitouch.git
 cd python-multitouch/library
 sudo python3 setup.py install
 sudo pip3 install python-uinput pyudev rpi_backlight
-#Install screen
-sudo apt-get install -y screen
+#Install screen / bluez-tools
+sudo apt-get install -y screen bluez-tools
 #Create screen-switch-scripts
 cd /home/pi/swipi-retro/assets/
 cd all
