@@ -40,4 +40,4 @@ sudo mv "Joy-Con (L).cfg" "/opt/retropie/configs/all/retroarch/autoconfig/Joy-Co
 sudo mv "Joy-Con (R).cfg" "/opt/retropie/configs/all/retroarch/autoconfig/Joy-Con (R).cfg"
 sudo mv "es_input.cfg" "/opt/retropie/configs/all/emulationstation/es_input.cfg"
 sudo mv "es_temporaryinput.cfg" "/opt/retropie/configs/all/emulationstation/es_temporaryinput.cfg"
-
+sudo reboot
