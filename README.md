@@ -26,15 +26,13 @@ Simply execute the lines below on your RetroPie (this will download this reposit
 ```
 sudo apt-get update
 sudo apt-get upgrade -y
-sudo apt-get dist-upgrade -y
-sudo apt-get install -y git
-sudo mkdir swipi-retro
-cd swipi-retro
 sudo git clone https://github.com/swipi-retro/swipi-retro.git
-sudo bash 00-prerequisite.sh
+sudo bash swipi-retro/install/00-prerequisite.sh
 ```
 
 ## How to use it?
 
 ## Acknowledgements
 * Rotter, for making the entry to CAD-software as easy as it gets
+* [Riking](https://github.com/riking/joycon), for making a joycon driver
+* [Drew Wallace](https://github.com/drew-wallace/switchberry), for the nice project
