@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sudo apt-get update
+sudo apt-get upgrade -y
 sudo chmod 755 /home/pi/swipi-retro/assets/*
 cd /home/pi/swipi-retro/assets/
 sudo mv 00-screenHandlerDisplayModeRunner.sh /etc/profile.d/00-screenHandlerDisplayModeRunner.sh
