@@ -37,8 +37,21 @@ sudo bash swipi-retro/install/00-prerequisite.sh
 
 Note: The installation will also create a default keyboard mapping for RetroPie.
 ## How to use it?
-* Rotter, for making the entry to CAD-software as easy as it gets
+* Start the system
+* Turn on both joycons (by pressing any button on the joycon)
 
+The joycons are automatically connected to the Pi (since we set them up with RetroPie earlier). As soon as they both are connected, both joycons should have one led blinking.
+
+Now you have to select if you want to use them both combined (1 player) or if you want them separately connected (2 players).
+
+__1 Player__
+* Press ZL and ZR at the same time. The bigger Joy-Con 1 shoulder key is ZL, the bigger Joy-Con 2 shoulder key is ZR. After doing that, the first led of both Joy-Cons should be permanently on (not blinking).
+
+__2 Player__
+* Simultanely press SL and SR on the first Joy-Con (led 1 should light permanentely). Then simultanely press SL and SR on the second Joy-Con (light 1 AND 2 should light permanently). SL and SR are the small keys on the side of the Joy-Cons (where the leds are too).
+
+__Done__
+Congratulations, you now can start playing. You don't have to map the Joy-Cons in RetroPie (we've already done that for you).
 
 ## Acknowledgements
 * Rotter, for making the entry to CAD-software as easy as it gets
