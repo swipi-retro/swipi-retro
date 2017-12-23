@@ -48,8 +48,7 @@ __1 Player__
 __2 Player__
 * Simultanely press SL and SR on the first Joy-Con (led 1 should light permanentely). Then simultanely press SL and SR on the second Joy-Con (light 1 AND 2 should light permanently). SL and SR are the small keys on the side of the Joy-Cons (where the leds are too).
 
-__Done__
-
+__Done!__ 
 Congratulations, you now can start playing. You don't have to map the Joy-Cons in RetroPie (we've already done that for you).
 
 ## Acknowledgements
