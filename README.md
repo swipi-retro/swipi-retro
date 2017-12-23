@@ -15,8 +15,6 @@ Disclaimer: We are absolute beginners in the field of CAD design and electrical 
 * Official Raspberry Pi 7" Screen
 * Nintendo Switch Joy-Cons
 * Heatsinks
-* Adafruit Trinket Pro 5V 16MHz
-* Adafruit Powerboost 1000C
 
 ## Building the hardware
 
