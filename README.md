@@ -21,14 +21,24 @@ Disclaimer: We are absolute beginners in the field of CAD design and electrical 
 ## Building the hardware
 
 ## Installation
-Simply execute the lines below on your RetroPie (this will download this repository and do the complete installation).
+* Install RetroPie on your SD-card
+* Connect a keyboard to your Pi
+* Start your Pi
+* When prompted by RetroPie to configure the keyboard, press F4 (to get to the console)
+* Simply execute the lines below (this will download this repository and do the complete installation).
 
 ```
 sudo git clone https://github.com/swipi-retro/swipi-retro.git
 sudo bash swipi-retro/install/00-prerequisite.sh
 ```
 
+* After the installation has completed and the Pi has restarted, connect your joycons in RetroPie (the usual way of connecting a bluetooth controller to RetroPie). As soon as the second joycon is done connecting, the first led on both joycons should start blinking. This is the indication everything went well.
+* Restart the system (this step is mandatory - without it, you won't be able to correctly connect your joycons)
+
+Note: The installation will also create a default keyboard mapping for RetroPie.
 ## How to use it?
+* Rotter, for making the entry to CAD-software as easy as it gets
+
 
 ## Acknowledgements
 * Rotter, for making the entry to CAD-software as easy as it gets
