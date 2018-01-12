@@ -36,7 +36,7 @@ def read_and_emulate_mouse(event, touch):
     if startX > 556 and startY < 140:
         if movement < 20 and event == TS_RELEASE and (time.time() - startTime) >= 2:
             call(["sudo", "screen", "-S", "jcDriver", "-X", "quit"])
-            call(["sudo", "screen", "-dmSL", "jcDriver", "jcDriver"])
+            call(["sudo", "screen", "-dmSL", "jcDriver", "jcdriver"])
 
 if __name__ == "__main__":
     global shouldRun
