@@ -3,11 +3,19 @@
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo chmod 755 /home/pi/swipi-retro/assets/*
+sudo chown pi:pi swipi-retro
+sudo chown pi:pi swipi-retro/*
 cd /home/pi/swipi-retro/assets/
-sudo mv 00-screenHandlerDisplayModeRunner.sh /etc/profile.d/00-screenHandlerDisplayModeRunner.sh
-sudo mv 00-screenHandlerJcDriverRunner.sh /etc/profile.d/00-screenHandlerJcDriverRunner.sh
-sudo mv 00-screenHandlerPowerStateOnIndicatorRunner.sh /etc/profile.d/00-screenHandlerPowerStateOnIndicatorRunner.sh
-sudo mv 00-screenHandlerShutdownListenerRunner.sh /etc/profile.d/00-screenHandlerShutdownListenerRunner.sh
+sudo mv 00-screenHandlerDisplayModeRunner.sh /etc/init.d/00-screenHandlerDisplayModeRunner.sh
+sudo mv 01-screenHandlerJcDriverRunner.sh /etc/init.d/01-screenHandlerJcDriverRunner.sh
+sudo mv 02-screenHandlerPowerStateOnIndicatorRunner.sh /etc/init.d/02-screenHandlerPowerStateOnIndicatorRunner.sh
+sudo mv 03-screenHandlerShutdownListenerRunner.sh /etc/init.d/03-screenHandlerShutdownListenerRunner.sh
+sudo mv 04-screenHandlerTouchRunner.sh /etc/init.d/04-screenHandlerTouchRunner.sh
+sudo update-rc.d 00-screenHandlerDisplayModeRunner defaults
+sudo update-rc.d 01-screenHandlerJcDriverRunner defaults
+sudo update-rc.d 02-screenHandlerPowerStateOnIndicatorRunner defaults
+sudo update-rc.d 03-screenHandlerShutdownListenerRunner defaults
+sudo update-rc.d 04-screenHandlerTouchRunner.sh defaults
 sudo mv jcdriver /usr/bin/jcdriver
 #General configuration
 
@@ -18,7 +26,10 @@ display_default_lcd=1" | sudo tee -a /boot/config.txt
 
 sudo apt-get install -y python-setuptools python-dev
 sudo apt-get install -y python3 python3-pip
+#sudo pip3 install python-uinput pyudev rpi_backlight
 sudo easy_install rpi.gpio
+cd github-repos/pimoroni/python-multitouch/python-multitouch-master/library
+sudo python3 setup.py install
 
 cd ..
 sudo mkdir git

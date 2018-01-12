@@ -1,6 +1,6 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides: /etc/init.d/00-screenHandlerDisplayModeRunner
+# Provides: /etc/init.d/02-screenHandlerPowerStateOnIndicatorRunner.sh
 # Required-Start: $remote_fs $syslog
 # Required-Stop: $remote_fs $syslog
 # Default-Start: 2 3 4 5
@@ -8,7 +8,7 @@
 # Short-Description: Kurze Beschreibung
 # Description: Lange Beschreibung
 ### END INIT INFO
-sudo nohup /home/pi/swipi-retro/assets/screenHandlerDisplayMode.sh &
+sudo nohup /home/pi/swipi-retro/assets/screenHandlerPowerStateOnIndicator.sh &
 
 sleep 1
 
