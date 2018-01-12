@@ -3,18 +3,18 @@
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo chmod 755 /home/pi/swipi-retro/assets/*
-sudo chown pi:pi swipi-retro
-sudo chown pi:pi swipi-retro/*
+sudo chown pi:pi /home/pi/swipi-retro
+sudo chown pi:pi /home/pi/swipi-retro/*
 cd /home/pi/swipi-retro/assets/
 sudo mv 00-screenHandlerDisplayModeRunner.sh /etc/init.d/00-screenHandlerDisplayModeRunner.sh
 sudo mv 01-screenHandlerJcDriverRunner.sh /etc/init.d/01-screenHandlerJcDriverRunner.sh
 sudo mv 02-screenHandlerPowerStateOnIndicatorRunner.sh /etc/init.d/02-screenHandlerPowerStateOnIndicatorRunner.sh
 sudo mv 03-screenHandlerShutdownListenerRunner.sh /etc/init.d/03-screenHandlerShutdownListenerRunner.sh
 sudo mv 04-screenHandlerTouchRunner.sh /etc/init.d/04-screenHandlerTouchRunner.sh
-sudo update-rc.d 00-screenHandlerDisplayModeRunner defaults
-sudo update-rc.d 01-screenHandlerJcDriverRunner defaults
-sudo update-rc.d 02-screenHandlerPowerStateOnIndicatorRunner defaults
-sudo update-rc.d 03-screenHandlerShutdownListenerRunner defaults
+sudo update-rc.d 00-screenHandlerDisplayModeRunner.sh defaults
+sudo update-rc.d 01-screenHandlerJcDriverRunner.sh defaults
+sudo update-rc.d 02-screenHandlerPowerStateOnIndicatorRunner.sh defaults
+sudo update-rc.d 03-screenHandlerShutdownListenerRunner.sh defaults
 sudo update-rc.d 04-screenHandlerTouchRunner.sh defaults
 sudo mv jcdriver /usr/bin/jcdriver
 #General configuration
