@@ -3,6 +3,9 @@
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo sh -c "echo 'avoid_warnings=1' >> /boot/config.txt"
+sudo sh -c "echo 'disable_splash=1' >> /boot/config.txt"
+sudo sh -c "echo 'dwc_otg.lpm_enable=0 console=serial0,115200 console=tty3 root=PARTUUID=5728b712-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait loglevel=3 consoleblank=0 plymouth.enable=0 logo.nologo vt.global_cursor_default=0' > /boot/cmdline.txt"
+sudo sed -i 's/tty1/tty3/g' /boot/cmdline.txt
 sudo chmod 755 /home/pi/swipi-retro/assets/*
 sudo chown pi:pi /home/pi/swipi-retro
 sudo chown pi:pi /home/pi/swipi-retro/*
