@@ -8,8 +8,9 @@ import glob
 from ft5406 import Touchscreen, TS_PRESS, TS_RELEASE, TS_MOVE
 from math import floor
 from subprocess import call
+import subprocess as SP
 import rpi_backlight as bl
-
+screenState = "/home/pi/swipi-retro/assets/currentDisplayMode"
 def read_and_emulate_mouse(event, touch):
     global startX
     global startY
@@ -24,19 +25,37 @@ def read_and_emulate_mouse(event, touch):
     (last_x, last_y) = touch.last_position
 
     movement = math.sqrt(pow(x - startX, 2) + pow(y - startY, 2))
-	# top left: brightness
+    # top left: brightness
     if startX < 244 and startY < 140 and x <= 244:
         bl.set_brightness(x + 11)
-		
+        
     # bottom left: volume
     if startX < 244 and startY > 340 and x <= 244:
         call(["amixer", "cset", "numid=1", "--", str(floor(x/2.44)) + '%'])
-	
+    
     #top right: kill jcDriver
     if startX > 556 and startY < 140:
         if movement < 20 and event == TS_RELEASE and (time.time() - startTime) >= 2:
             call(["sudo", "screen", "-S", "jcDriver", "-X", "quit"])
             call(["sudo", "screen", "-dmSL", "jcDriver", "jcdriver"])
+    #bottom right: switch Displaymode
+    if startX > 556 and startY > 340:
+        if movement < 20 and event == TS_RELEASE and (time.time() - startTime) >= 2:
+            stateFile = open(screenState, 'r')
+            state = stateFile.readline()
+            state = str(state)
+#            print(state)
+#            print(state.split("\n"))
+#            a,b = state.split("\n")
+#            state = a
+            stateFile.close()
+            if (state == "lcd"):
+                SP.call('echo "hdmi" > /home/pi/swipi-retro/assets/currentDisplayMode', shell=True)
+                SP.call(['sudo','/home/pi/swipi-retro/assets/hdmi_out'])
+            else :
+                SP.call('echo "lcd" > /home/pi/swipi-retro/assets/currentDisplayMode', shell=True)
+                SP.call(['sudo','/home/pi/swipi-retro/assets/lcd_out'])
+
 
 if __name__ == "__main__":
     global shouldRun
