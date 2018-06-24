@@ -44,10 +44,6 @@ def read_and_emulate_mouse(event, touch):
             stateFile = open(screenState, 'r')
             state = stateFile.readline()
             state = str(state)
-#            print(state)
-#            print(state.split("\n"))
-#            a,b = state.split("\n")
-#            state = a
             stateFile.close()
             if (state == "lcd"):
                 SP.call('echo "hdmi" > /home/pi/swipi-retro/assets/currentDisplayMode', shell=True)

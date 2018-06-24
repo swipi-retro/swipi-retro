@@ -2,6 +2,7 @@
 
 sudo apt-get update
 sudo apt-get upgrade -y
+sudo sh -c "echo 'avoid_warnings=1' >> /boot/config.txt"
 sudo chmod 755 /home/pi/swipi-retro/assets/*
 sudo chown pi:pi /home/pi/swipi-retro
 sudo chown pi:pi /home/pi/swipi-retro/*
