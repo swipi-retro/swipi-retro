@@ -10,18 +10,19 @@ sudo chmod 755 /home/pi/swipi-retro/assets/*
 sudo chown pi:pi /home/pi/swipi-retro
 sudo chown pi:pi /home/pi/swipi-retro/*
 cd /home/pi/swipi-retro/assets/
-sudo mv 00-screenHandlerDisplayModeRunner.sh /etc/init.d/00-screenHandlerDisplayModeRunner.sh
-sudo mv 01-screenHandlerJcDriverRunner.sh /etc/init.d/01-screenHandlerJcDriverRunner.sh
-sudo mv 02-screenHandlerPowerStateOnIndicatorRunner.sh /etc/init.d/02-screenHandlerPowerStateOnIndicatorRunner.sh
-sudo mv 03-screenHandlerShutdownListenerRunner.sh /etc/init.d/03-screenHandlerShutdownListenerRunner.sh
-sudo mv 04-screenHandlerTouchRunner.sh /etc/init.d/04-screenHandlerTouchRunner.sh
+sudo mv 00-startup.sh /etc/init.d/00-startup.sh
+sudo mv 01-screenHandlerDisplayModeRunner.sh /etc/init.d/01-screenHandlerDisplayModeRunner.sh
+sudo mv 02-screenHandlerJcDriverRunner.sh /etc/init.d/02-screenHandlerJcDriverRunner.sh
+sudo mv 03-screenHandlerPowerStateOnIndicatorRunner.sh /etc/init.d/03-screenHandlerPowerStateOnIndicatorRunner.sh
+sudo mv 04-screenHandlerShutdownListenerRunner.sh /etc/init.d/04-screenHandlerShutdownListenerRunner.sh
+sudo mv 05-screenHandlerTouchRunner.sh /etc/init.d/05-screenHandlerTouchRunner.sh
 sudo mv custom-splash.mp4 /home/pi/RetroPie/splashscreens/custom-splash.mp4
 sudo mv splashscreen.list /etc/splashscreen.list
-sudo update-rc.d 00-screenHandlerDisplayModeRunner.sh defaults
-sudo update-rc.d 01-screenHandlerJcDriverRunner.sh defaults
-sudo update-rc.d 02-screenHandlerPowerStateOnIndicatorRunner.sh defaults
-sudo update-rc.d 03-screenHandlerShutdownListenerRunner.sh defaults
-sudo update-rc.d 04-screenHandlerTouchRunner.sh defaults
+sudo update-rc.d 01-screenHandlerDisplayModeRunner.sh defaults
+sudo update-rc.d 02-screenHandlerJcDriverRunner.sh defaults
+sudo update-rc.d 03-screenHandlerPowerStateOnIndicatorRunner.sh defaults
+sudo update-rc.d 04-screenHandlerShutdownListenerRunner.sh defaults
+sudo update-rc.d 05-screenHandlerTouchRunner.sh defaults
 sudo mv jcdriver /usr/bin/jcdriver
 #General configuration
 
@@ -57,5 +58,7 @@ sudo mv "Half Joy-Con 2.cfg" "/opt/retropie/configs/all/retroarch/autoconfig/Hal
 sudo mv "Half Joy-Con 2.cfg.bak" "/opt/retropie/configs/all/retroarch/autoconfig/Half Joy-Con 2.cfg.bak"
 sudo mv "es_input.cfg" "/opt/retropie/configs/all/emulationstation/es_input.cfg"
 sudo mv "es_temporaryinput.cfg" "/opt/retropie/configs/all/emulationstation/es_temporaryinput.cfg"
+sudo touch ~/.hushlogin
+sudo mv "/home/pi/swipi-retro/assets/autologin@.service" "/etc/systemd/system/autologin@.service"
 print("Setup complete, going to reboot")
 sudo reboot

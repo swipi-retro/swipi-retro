@@ -1,6 +1,6 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides: /etc/init.d/01-screenHanderJcDriverRunner.sh
+# Provides: /etc/init.d/02-screenHanderJcDriverRunner.sh
 # Required-Start: $remote_fs $syslog
 # Required-Stop: $remote_fs $syslog
 # Default-Start: 2 3 4 5
