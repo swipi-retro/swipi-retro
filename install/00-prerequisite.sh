@@ -15,7 +15,7 @@ sudo mv 01-screenHandlerJcDriverRunner.sh /etc/init.d/01-screenHandlerJcDriverRu
 sudo mv 02-screenHandlerPowerStateOnIndicatorRunner.sh /etc/init.d/02-screenHandlerPowerStateOnIndicatorRunner.sh
 sudo mv 03-screenHandlerShutdownListenerRunner.sh /etc/init.d/03-screenHandlerShutdownListenerRunner.sh
 sudo mv 04-screenHandlerTouchRunner.sh /etc/init.d/04-screenHandlerTouchRunner.sh
-sudo mv custom-splash.mp4 /home/pi/retropie/splashscreens/custom-splash.mp4
+sudo mv custom-splash.mp4 /home/pi/RetroPie/splashscreens/custom-splash.mp4
 sudo update-rc.d 00-screenHandlerDisplayModeRunner.sh defaults
 sudo update-rc.d 01-screenHandlerJcDriverRunner.sh defaults
 sudo update-rc.d 02-screenHandlerPowerStateOnIndicatorRunner.sh defaults
