@@ -16,8 +16,6 @@ sudo mv 02-screenHandlerJcDriverRunner.sh /etc/init.d/02-screenHandlerJcDriverRu
 sudo mv 03-screenHandlerPowerStateOnIndicatorRunner.sh /etc/init.d/03-screenHandlerPowerStateOnIndicatorRunner.sh
 sudo mv 04-screenHandlerShutdownListenerRunner.sh /etc/init.d/04-screenHandlerShutdownListenerRunner.sh
 sudo mv 05-screenHandlerTouchRunner.sh /etc/init.d/05-screenHandlerTouchRunner.sh
-sudo mv custom-splash.mp4 /home/pi/RetroPie/splashscreens/custom-splash.mp4
-sudo mv splashscreen.list /etc/splashscreen.list
 sudo update-rc.d 01-screenHandlerDisplayModeRunner.sh defaults
 sudo update-rc.d 02-screenHandlerJcDriverRunner.sh defaults
 sudo update-rc.d 03-screenHandlerPowerStateOnIndicatorRunner.sh defaults
@@ -60,5 +58,7 @@ sudo mv "es_input.cfg" "/opt/retropie/configs/all/emulationstation/es_input.cfg"
 sudo mv "es_temporaryinput.cfg" "/opt/retropie/configs/all/emulationstation/es_temporaryinput.cfg"
 sudo touch ~/.hushlogin
 sudo mv "/home/pi/swipi-retro/assets/autologin@.service" "/etc/systemd/system/autologin@.service"
+sudo mv "/home/pi/swipi-retro/assets/autostart.sh" "/opt/retropie/configs/all/autostart.sh"
+sudo chmod 644 autostart.sh
 print("Setup complete, going to reboot")
 sudo reboot
