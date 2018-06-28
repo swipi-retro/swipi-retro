@@ -4,9 +4,9 @@ sudo apt-get update
 sudo apt-get upgrade -y
 sudo sh -c "echo 'avoid_warnings=1' >> /boot/config.txt"
 sudo sh -c "echo 'disable_splash=1' >> /boot/config.txt"
-sudo sh -c "echo 'dwc_otg.lpm_enable=0 console=serial0,115200 console=tty3 root=PARTUUID=5728b712-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait loglevel=3 consoleblank=0 plymouth.enable=0 logo.nologo vt.global_cursor_default=0' > /boot/cmdline.txt"
+sudo sh -c "echo 'dwc_otg.lpm_enable=0 console=serial0,115200 console=tty3 root=PARTUUID=5728b712-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait loglevel=3 consoleblank=0 plymouth.enable=0 quiet splash loglevel=3 logo.nologo vt.global_cursor_default=0' > /boot/cmdline.txt"
 sudo sed -i 's/tty1/tty3/g' /boot/cmdline.txt
-sudo chmod 755 /home/pi/swipi-retro/assets/*
+sudo chmod -R 755 /home/pi/swipi-retro/assets/*
 sudo chown pi:pi /home/pi/swipi-retro
 sudo chown pi:pi /home/pi/swipi-retro/*
 cd /home/pi/swipi-retro/assets/
@@ -16,6 +16,7 @@ sudo mv 02-screenHandlerJcDriverRunner.sh /etc/init.d/02-screenHandlerJcDriverRu
 sudo mv 03-screenHandlerPowerStateOnIndicatorRunner.sh /etc/init.d/03-screenHandlerPowerStateOnIndicatorRunner.sh
 sudo mv 04-screenHandlerShutdownListenerRunner.sh /etc/init.d/04-screenHandlerShutdownListenerRunner.sh
 sudo mv 05-screenHandlerTouchRunner.sh /etc/init.d/05-screenHandlerTouchRunner.sh
+sudo update-rc.d 00-startup.sh defaults
 sudo update-rc.d 01-screenHandlerDisplayModeRunner.sh defaults
 sudo update-rc.d 02-screenHandlerJcDriverRunner.sh defaults
 sudo update-rc.d 03-screenHandlerPowerStateOnIndicatorRunner.sh defaults
@@ -56,9 +57,20 @@ sudo mv "Half Joy-Con 2.cfg" "/opt/retropie/configs/all/retroarch/autoconfig/Hal
 sudo mv "Half Joy-Con 2.cfg.bak" "/opt/retropie/configs/all/retroarch/autoconfig/Half Joy-Con 2.cfg.bak"
 sudo mv "es_input.cfg" "/opt/retropie/configs/all/emulationstation/es_input.cfg"
 sudo mv "es_temporaryinput.cfg" "/opt/retropie/configs/all/emulationstation/es_temporaryinput.cfg"
-sudo touch ~/.hushlogin
+sudo touch /home/pi/.hushlogin
 sudo mv "/home/pi/swipi-retro/assets/autologin@.service" "/etc/systemd/system/autologin@.service"
 sudo mv "/home/pi/swipi-retro/assets/autostart.sh" "/opt/retropie/configs/all/autostart.sh"
-sudo chmod 644 autostart.sh
-print("Setup complete, going to reboot")
+sudo chmod 644 /opt/retropie/configs/all/autostart.sh
+echo "Setup complete, going to reboot"
+#MoltenStart
+cd
+git clone https://github.com/jgeumlek/MoltenGamepad.git
+cd MoltenGamepad
+sudo make eventlists
+sudo mv /home/pi/swipi-retro/assets/Makefile /home/pi/MoltenGamepad/
+sudo make
+cd installation/singleuser
+sudo ./configure.sh pi
+sudo ./install.sh
+#MoltenEnd
 sudo reboot
