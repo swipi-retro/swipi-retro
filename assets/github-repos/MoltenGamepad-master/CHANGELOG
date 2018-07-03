@@ -1,0 +1,144 @@
+---------------------------
+1.1.0
+2017-04-25
+---------------------------
+
+A smaller update with some neat new features:
+
+* A Joy-Con plugin! Thanks to the work of riking and others, the Joy-Con buttons and sticks can be read over the hidraw interface. They still sometimes disconnect though...
+* An experimental translator that reads a Wii remote's motion+ data to generate relative mouse movements. See issue #29 for details.
+* Minor improvements to the plugin loading
+* Virtual gamepads are now created first.
+
+---------------------------
+1.0.0
+2017-04-05
+---------------------------
+
+The 1.0 release! With some luck there won't be anything on fire, but this release comes with some huge changes.
+
+MoltenGamepad is still not considered "done" or even "reliable"; however, all the basic functionality is in there. Compared to previous releases, a lot of the strife and hackishness of those features has been smoothed.
+
+This involved a lot of rewrites, particularly with support for group translators that need to look at multiple input events. One such usability improvement is that group translators of thumb sticks can now filter out events withing a deadzone, so that a jittery stick doesn't clobber the output. It is now reasonable to assign both buttons and sticks to the same output events.
+
+Some backwards-compatability breaking changes have been included.
+
+* A socket interface was added, allowing for the use of clients like moltengamepadctl to communicate with a running instance.
+* The default umask was changed so that created files like the FIFO or socket are group-writable.
+* MoltenGamepad supports systems without UI_GET_SYSNAME by using the phys field of devices to detect MG's own virtual ones.
+* A plugin loading framework for drivers, so that they can be compiled separately with their own dependencies.
+* Inverting an output event is now denoted by a "-" at the end of the name rather than in front.
+* "stick" and "dpad" group translators added, that are a bit smarter in generating output events by looking at both axes of a thumb stick at once.
+* Input events can be inverted too, such as "gamepad.(left_x-,left_y) = stick(left_x,left_y)"
+* More info is available via the "print" command, such as aliases or translators.
+* An auto_profile_subdir can be specified: any files in that subdirectory of the profile directory will be loaded when MG starts.
+* Added --print-cfg, which prints out a sample moltengamepad.cfg with all available options.
+* Rename "primary" and "secondary" to "first" and "second" for consistency
+* Removed the alterslot command.
+
+---------------------------
+0.3.4-beta
+2017-03-28
+---------------------------
+
+Another small update fixing some issues while the devel branch slowly churns along.
+
+* Fix Wii Remote IR data, which was previously reported as always positive.
+* Fix bug where a newly connected wiimote would try to open its IR devnode when discovering its accel devnode.
+* Usability: More informative messages about profile loading and STDIN usage during start up.
+
+---------------------------
+0.3.3-beta
+2016-12-19
+---------------------------
+
+A small update to address some issues before the next development version is ready.
+
+* Remove reliance on certain key codes to aid in compiling on older systems.
+* Remove the use of UI_GET_SYSNAME as the new phys strings can handle that. (Multiple instances of MG is not a supported use case.)
+* Fix the constant used for scaling the nunchuk's thumb stick.
+
+---------------------------
+0.3.2-beta
+2016-10-31
+---------------------------
+
+A small update that improves the start up and shut down of MoltenGamepad.
+
+* Added `--stay-alive` to prevent MG from quiting when standard input is closed.
+* Added `--replace-fifo` to forcefully clear out the FIFO on the filesystem if it already exists.
+* Various bug fixes and code clean ups in these code paths.
+
+---------------------------
+0.3.1-beta
+2016-10-23
+---------------------------
+
+MoltenGamepad is close to a 1.0 release! Things are shaping up nicely. 1.0 will be a soli-but-not-complete experience, and 2.0 probably won't be far behind to clear out some cruft from these beta versions.
+
+One notable change is how trigger buttons are handled. A device with analog triggers might still have digital button events associated with the triggers as well. These button events are semantically different from purely digital triggers. Most of the time one would wish to ignore these additional button events, so they have been given separate names to distinguish them.
+
+If a controller has purely digital triggers, it should expose the "tr2" and "tl2" events.
+
+If a controller has purely analog triggers, it should expose the "tr2_axis" and "tl2_axis" events.
+
+If a controller has analog triggers with additional digital buttons on them, it should expose "tr2_axis", "tl2_axis", "tr2_axis_btn", and "tl2_axis_btn". The events "tr2" and "tl2" should NOT be present.
+
+Highlights:
+
+* MoltenGamepad's virtual devices are given informative phys identifiers.
+* A device's initial button press is no longer consumed in just allocating a controller slot.
+* Axis events can cause slot allocation as well.
+* The global options accessed via `set` can now have their values read from files on start-up.
+* Two new fields for gendev matching: driver and events. The latter allows matches based on what events the device reports.
+* gendev descriptions can reference event codes by number, such as `key(306)` or `abs(1)`.
+* gendev matches can be given an `order` to allow for flexibility in which matches get priority.
+* The `simple` chord translator has been renamed to `chord`.
+* More informative messages throughout.
+* The `--verbose` flag was added to help in debugging configuration issues. Specifying it twice provides even more information.
+* The `assign` command was added, which can tie specific phys or uniq identifiers to particular slots.
+* Fixed how XDG_CONFIG_HOME was read.
+* `alterslot` will be removed in the next version.
+
+---------------------------
+0.2.1-beta
+2016-09-17
+---------------------------
+
+This release has new features and significant code restructuring and bug fixes.
+
+Code and feature set getting more stable, but this is not yet a 1.0 release.
+
+The largest new feature is rumble support, but it carries a caveat and is disabled by default. The uinput kernel module appears to have a bug when a virtual device is destroyed while having force-feedback effects uploaded. When hit, this bug appears to cause a failure state that requires the user to reboot their machine. MoltenGamepad will block destroying these devices until all force-feedback effects are erased, but the user must take care to not forcefully kill the MoltenGamepad process.
+
+Due to the above, rumble support is not enabled by default, but is controlled by a simple `--rumble` command line flag.
+
+Highlights:
+
+* Rumble support added.
+* "make eventlists" can auto-generate the correct event lists.
+* Relevant "jsX" devices are grabbed in addition to the "eventX" devices.
+* `set` command added for global settings.
+* `auto_assign` global setting added to assign devices to slots upon connection.
+* The `move` command can use `auto` as a slot destination.
+* A plug-in API is forming for adding support for more devices.
+* `alterslot` deprecated, to be removed in future version.
+
+---------------------------
+0.1.1-beta
+2016-07-30
+---------------------------
+
+The first notable release. It follows an extended period in "alpha".
+
+This project is not yet stable. Large features are still subject to changes.
+
+Highlights:
+
+* Mouse movements can now be generated as "rel_x" and "rel_y". Requires being assigned to the keyboard slot.
+* XDG_CONFIG_DIRS support. Now system-wide files can be placed in /etc/xdg/moltengamepad/
+* Global options like "mimic_xpad" can be specified in "moltengamepad.cfg"
+* Generic devices can be matched by vendor:product ids
+* When saving profiles, the profiles to be saved can be specified
+* General behind-the-scenes code cleaning
+* Small bug fixes and improvements
