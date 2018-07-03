@@ -1,0 +1,6 @@
+moltengamepad
+*.o
+.d
+*.so
+*.po
+*.a
