@@ -1,55 +1,65 @@
 #include "Arduino.h"
 
 // Configuration
-const int powerButtonPin = 12;
-const int shutdownCommandSenderPin =  4;
-const int shutdownNotificationReceiverPin =  8;
-const int ledPin = 13;
-const byte powerCutPin = A4;
+const int powerButtonPin = 17;
+const int enPin = 4;
+
+//const int shutdownCommandSenderPin =  4;
+//const int shutdownNotificationReceiverPin =  8;
+//const int ledPin = 13;
+//const byte powerCutPin = A4;
 
 // Initialize some values
 boolean isInShutdown = false;
-int lastButtonState = HIGH;
+int lastButtonState = LOW;
 int clickStartedMillis = 0;
 
 void setup() {
+  Serial.begin(115200);
+  
   // Pin modes
-  pinMode(shutdownCommandSenderPin, OUTPUT);
-  digitalWrite(shutdownCommandSenderPin, HIGH);
-  pinMode(ledPin, OUTPUT);
+  //pinMode(shutdownCommandSenderPin, OUTPUT);
+  //digitalWrite(shutdownCommandSenderPin, HIGH);
+  //pinMode(ledPin, OUTPUT);
   pinMode(powerButtonPin, INPUT);
-  digitalWrite(powerButtonPin, HIGH); // Activate pull-up resistor
-  pinMode(shutdownNotificationReceiverPin, INPUT);
-  pinMode(powerCutPin, OUTPUT);
+  pinMode(enPin, OUTPUT);
+  digitalWrite(enPin, HIGH);
+  
+  //digitalWrite(powerButtonPin, HIGH); // Activate pull-up resistor
+  //pinMode(shutdownNotificationReceiverPin, INPUT);
+  //pinMode(powerCutPin, OUTPUT);
 }
 
 void loop() {
     int buttonState = digitalRead(powerButtonPin);
-
+    
     if (buttonState != lastButtonState) {
-      if (buttonState == LOW){ // Button was just pressed
+      if (buttonState == HIGH){ // Button was just pressed
         clickStartedMillis = millis();
-        lastButtonState = LOW;
+        lastButtonState = HIGH;
+          Serial.println("press");
       }
       else { // // Button was just released
+          Serial.println("release");
         int timePressed =millis() - clickStartedMillis;
 
-        lastButtonState = HIGH;
+        lastButtonState = LOW;
         clickStartedMillis = 0;
 
         if (timePressed >= 1000 && timePressed < 3000) {
-          digitalWrite(shutdownCommandSenderPin, LOW); // Send shutdown-command
+          //digitalWrite(shutdownCommandSenderPin, LOW); // Send shutdown-command
           isInShutdown = true;
         }
 
         if (timePressed >= 3000) {
           // Cut power
-          analogWrite(powerCutPin, 1023);
+          Serial.println("cut");
+          digitalWrite(enPin, LOW);
         }
       }
     }
 
-    if (isInShutdown == true){
+    /*if (isInShutdown == true){
       int shutdownState = digitalRead(shutdownNotificationReceiverPin);
 
       if (shutdownState == LOW) {
@@ -72,5 +82,5 @@ void loop() {
         // Cut power
         analogWrite(powerCutPin, 1023);
       }
-    }
+    }*/
 }
