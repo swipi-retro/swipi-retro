@@ -63,12 +63,12 @@ sudo mv "/home/pi/swipi-retro/assets/autostart.sh" "/opt/retropie/configs/all/au
 sudo chmod 644 /opt/retropie/configs/all/autostart.sh
 #MoltenStart
 #git clone https://github.com/jgeumlek/MoltenGamepad.git
-cd github-repos/MoltenGamepad-master/installation/systemuser
+cd github-repos/Molten/installation/systemuser
 #sudo make eventlists
 #sudo mv /home/pi/swipi-retro/assets/Makefile /home/pi/MoltenGamepad/
 #sudo make
 #cd installation/systemuser
 sudo ./install.sh
-sudo mv /home/pi/swipi-retro/assets/moltengamepad /usr/local/bin/moltengamepad
+#sudo mv /home/pi/swipi-retro/assets/moltengamepad /usr/local/bin/moltengamepad
 #MoltenEnd
 sudo reboot
