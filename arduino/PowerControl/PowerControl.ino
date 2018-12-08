@@ -1,8 +1,8 @@
 #include "Arduino.h"
 
 // Configuration
-const int powerButtonPin = 17;
-const int enPin = 4;
+const int powerButtonPin = 33;
+const int enPin = 32;
 
 //const int shutdownCommandSenderPin =  4;
 //const int shutdownNotificationReceiverPin =  8;
