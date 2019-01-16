@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sudo screen -dmSL displayMode /home/pi/swipi-retro/assets/displayMode.py
+sudo screen -dmS displayMode /home/pi/swipi-retro/assets/displayMode.py

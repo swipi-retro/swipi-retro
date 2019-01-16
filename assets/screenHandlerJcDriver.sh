@@ -15,7 +15,7 @@ finalR=$(echo $connectedR | cut -d ' ' -f1)
 if [ $finalL -eq 1 ] && [ $controlflag -eq 0 ] && [ $finalR -eq 1 ]
 then
 controlflag=$(($controlflag + 1 ))
-sudo screen -dmSL jcDriver jcdriver 
+sudo screen -dmS jcDriver jcdriver 
 fi
 sleep 0.2
 

@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sudo screen -dmSL shutdownListener /home/pi/swipi-retro/assets/shutdownListener.py
+sudo screen -dmS shutdownListener /home/pi/swipi-retro/assets/shutdownListener.py
