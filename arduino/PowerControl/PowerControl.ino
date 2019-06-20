@@ -1,63 +1,89 @@
 #include "Arduino.h"
+#include <Adafruit_INA260.h>
 
-// Configuration
+// Pins
 const int powerButtonPin = 33;
-const int enPin = 32;
+const int mcuEnPin = 32; // for 3v3 boost
+const int mainEnPin = 2; // for pi and screen
 
-//const int shutdownCommandSenderPin =  4;
-//const int shutdownNotificationReceiverPin =  8;
-//const int ledPin = 13;
-//const byte powerCutPin = A4;
-
-// Initialize some values
-boolean isInShutdown = false;
+// Inits
 int lastButtonState = LOW;
 int clickStartedMillis = 0;
+boolean isInSoftShutdown = false;
+boolean isInForcedShutdown = false;
+Adafruit_INA260 ina260 = Adafruit_INA260(); // Voltage/Current/Power monitor
 
 void setup() {
+  // Serial with usb
   Serial.begin(115200);
-  
-  // Pin modes
-  //pinMode(shutdownCommandSenderPin, OUTPUT);
-  //digitalWrite(shutdownCommandSenderPin, HIGH);
-  //pinMode(ledPin, OUTPUT);
+
+  // Assign powerButtonPin as input
   pinMode(powerButtonPin, INPUT);
-  pinMode(enPin, OUTPUT);
-  digitalWrite(enPin, HIGH);
-  
-  //digitalWrite(powerButtonPin, HIGH); // Activate pull-up resistor
-  //pinMode(shutdownNotificationReceiverPin, INPUT);
-  //pinMode(powerCutPin, OUTPUT);
+
+  // Keep mcu running by enabling 3.3v regulator
+  pinMode(mcuEnPin, OUTPUT);
+  digitalWrite(mcuEnPin, HIGH);
+
+  // Start pi by enabling 5v regulators
+  pinMode(mainEnPin, OUTPUT);
+  digitalWrite(mainEnPin, HIGH);
 }
 
 void loop() {
-    int buttonState = digitalRead(powerButtonPin);
-    
-    if (buttonState != lastButtonState) {
-      if (buttonState == HIGH){ // Button was just pressed
-        clickStartedMillis = millis();
-        lastButtonState = HIGH;
-          Serial.println("press");
-      }
-      else { // // Button was just released
-          Serial.println("release");
-        int timePressed =millis() - clickStartedMillis;
+  // Getting the button-state
+  int buttonState = digitalRead(powerButtonPin);
 
-        lastButtonState = LOW;
-        clickStartedMillis = 0;
+  // Listening for button changes
+  if (buttonState != lastButtonState) {
+    if (buttonState == HIGH){ // Button was just pressed
+      Serial.println("power-button pressed");
+      clickStartedMillis = millis();
+      lastButtonState = HIGH;
+    }
+    else { // // Button was just released
+      Serial.println("power-button released");
+      lastButtonState = LOW;
+      clickStartedMillis = 0;
 
-        if (timePressed >= 1000 && timePressed < 3000) {
-          //digitalWrite(shutdownCommandSenderPin, LOW); // Send shutdown-command
-          isInShutdown = true;
-        }
-
-        if (timePressed >= 3000) {
-          // Cut power
-          Serial.println("cut");
-          digitalWrite(enPin, LOW);
-        }
+      // If the 5v regulator was disabled (isInForcedShutdown == true), we want to disable the mcu immediately after the button is released
+      if (isInForcedShutdown){
+        Serial.println("power-button released after forced shutdown was detected, disabling 3.3v regulator");
+        delay(200);
+        digitalWrite(mcuEnPin, LOW); // kill mcu
       }
     }
+  }
+
+  // Logic for forced shutdown when holding button
+  if (!isInForcedShutdown && clickStartedMillis > 0){
+    int buttonPressedMs = millis() - clickStartedMillis;
+
+    if (buttonPressedMs > 3000) {
+      Serial.println("forced shutdown detected, disabling 5v regulator");
+      digitalWrite(mainEnPin, LOW);
+      isInForcedShutdown = true;
+    }
+  }
+
+
+
+  
+
+
+    
+//    // Power readings
+//    Serial.print("Current: ");
+//    Serial.print(ina260.readCurrent());
+//    Serial.println(" mA");
+//  
+//    Serial.print("Bus Voltage: ");
+//    Serial.print(ina260.readBusVoltage());
+//    Serial.println(" mV");
+//  
+//    Serial.print("Power: ");
+//    Serial.print(ina260.readPower());
+//    Serial.println(" mW");
+    
 
     /*if (isInShutdown == true){
       int shutdownState = digitalRead(shutdownNotificationReceiverPin);
